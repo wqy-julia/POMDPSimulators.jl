@@ -33,6 +33,8 @@ export
     backtrace,
     undiscounted_reward,
     discounted_reward,
+    searching_time,
+    tree_depth,
     n_steps,
     step_tuple
 include("history.jl")

@@ -40,7 +40,7 @@ action_hist(h::AbstractSimHistory) = h[:a]
 observation_hist(h::AbstractSimHistory) = h[:o]
 belief_hist(h::AbstractSimHistory) = push!([step.b for step in hist(h)], last(hist(h)).bp)
 reward_hist(h::AbstractSimHistory) = h[:r]
-info_hist(h::AbstractSimHistory) = h[:info]
+info_hist(h::AbstractSimHistory) = h[:i]
 ainfo_hist(h::AbstractSimHistory) = h[:action_info]
 uinfo_hist(h::AbstractSimHistory) = h[:update_info]
 
@@ -59,6 +59,23 @@ function discounted_reward(h::AbstractSimHistory)
     return r_total
 end
 
+# NEW ADDED
+function searching_time(h::AbstractSimHistory)
+    time_sum = 0.0
+    for ai in h[:action_info]
+        time_sum += ai[:search_time_us]/1e6
+    end
+    return time_sum / length(h)
+end
+
+# NEW ADDED
+function tree_depth(h::AbstractSimHistory)
+    depth_sum = 0
+    for ai in h[:action_info]
+        depth_sum += ai[:tree_depth]
+    end
+    return depth_sum / length(h)
+end
 
 # AbstractArray interface
 Base.size(h::AbstractSimHistory) = (n_steps(h),)
