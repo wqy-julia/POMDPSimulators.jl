@@ -35,6 +35,8 @@ export
     discounted_reward,
     searching_time,
     tree_depth,
+    alevel,
+    olevel,
     n_steps,
     step_tuple
 include("history.jl")

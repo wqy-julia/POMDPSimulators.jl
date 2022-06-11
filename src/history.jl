@@ -77,6 +77,24 @@ function tree_depth(h::AbstractSimHistory)
     return depth_sum / length(h)
 end
 
+# NEW ADDED
+function alevel(h::AbstractSimHistory)
+    alevel_sum = 0
+    for ai in h[:action_info]
+        alevel_sum += ai[:ALEVEL]
+    end
+    return alevel_sum / length(h)
+end
+
+# NEW ADDED
+function olevel(h::AbstractSimHistory)
+    olevel_sum = 0
+    for ai in h[:action_info]
+        olevel_sum += ai[:OLEVEL]
+    end
+    return olevel_sum / length(h)
+end
+
 # AbstractArray interface
 Base.size(h::AbstractSimHistory) = (n_steps(h),)
 
